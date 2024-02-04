@@ -2,34 +2,32 @@ package geneticAlgorithm;
 
 import java.util.Arrays;
 
+import util.MathUtil;
+
 public class Individual {
-	public static final int geneLength = 64;
 	
-	private byte[] genes;
+	private double[] genes;
 	private int fitness;
 	
-	public Individual() {
-		genes = new byte[geneLength];
-		fitness = 0;
+	public Individual(int geneLength) {
+		double[] randomArray = MathUtil.randomArray(geneLength);
+		genes = MathUtil.normalize(randomArray);
 		
-		for(int i = 0; i < geneLength; i++) {
-			byte gene = (byte) Math.round(Math.random());
-			genes[i] = gene;
-		}
+		fitness = 0;
 	}
 	
-	protected byte getGene(int index) {
+	protected double getGene(int index) {
 		return genes[index];
 	}
 	
 	
-	protected void setGene(int index, byte gene) {
+	protected void setGene(int index, double gene) {
 		genes[index] = gene;
 	}
 	
-	public int getFitness() {
+	protected int getFitness(GeneticAlgorithm algorithm) {
 		if(fitness == 0) {
-			fitness = GeneticAlgorithm.getFitness(this);
+			fitness = algorithm.getFitness(this);
 		}
 		
 		return fitness;

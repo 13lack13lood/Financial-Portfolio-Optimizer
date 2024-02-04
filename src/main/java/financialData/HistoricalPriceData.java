@@ -1,9 +1,8 @@
 package financialData;
 import java.util.LinkedList;
-import java.util.List;
 
 public class HistoricalPriceData {
-	private List<HistoricalPriceDataPoint> data;
+	private LinkedList<HistoricalPriceDataPoint> data;
 	
 	public HistoricalPriceData() {
 		data = new LinkedList<HistoricalPriceDataPoint>();
@@ -13,7 +12,12 @@ public class HistoricalPriceData {
 		data.add(dataPoint);
 	}
 	
-	public List<HistoricalPriceDataPoint> getData() {
+	public LinkedList<HistoricalPriceDataPoint> getData() {
 		return data;
+	}
+	
+	@Override
+	public String toString() {
+		return data.toString();
 	}
 }

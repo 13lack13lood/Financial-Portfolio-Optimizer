@@ -1,16 +1,19 @@
 package geneticAlgorithm;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Population {
 	private List<Individual> individuals;
+	private int size;
 	
-	public Population(int size, boolean createNew) {
-		individuals = new LinkedList<Individual>();
+	public Population(int size, int geneLength, boolean createNew) {
+		individuals = new ArrayList<Individual>();
+		
+		this.size = size;
 		
 		if(createNew) {
-			
+			createNewPopulation(size, geneLength);
 		}
 	}
 	
@@ -18,11 +21,15 @@ public class Population {
 		return individuals;
 	}
 	
-	protected Individual getFittest() {
+	protected int getSize() {
+		return size;
+	}
+	
+	protected Individual getFittest(GeneticAlgorithm algorithm) {
 		Individual fittest = individuals.get(0);
 		
 		for(Individual individual : individuals) {
-			if(fittest.getFitness() < individual.getFitness()) {
+			if(fittest.getFitness(algorithm) < individual.getFitness(algorithm)) {
 				fittest = individual;
 			}
 		}
@@ -30,9 +37,9 @@ public class Population {
 		return fittest;
 	}
 	
-	private void createNewPopulation(int size) {
+	private void createNewPopulation(int size, int geneLength) {
 		for(int i = 0; i < size; i++) {
-			individuals.add(new Individual());
+			individuals.add(new Individual(geneLength));
 		}
 	}
 }
