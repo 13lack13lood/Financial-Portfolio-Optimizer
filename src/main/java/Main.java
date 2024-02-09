@@ -9,23 +9,33 @@ import util.MathUtil;
 public class Main {
 
 	public static void main(String[] args) {
-		String[] tickers = {"aapl", "amzn", "googl", "nvda", "msft", "v", "tsla", "meta", "cost", "jnj", "unh"};
+		String[] tickers = {"aapl", "amzn", "googl"}; //  "nvda", "msft", "v", "tsla", "meta", "cost", "jnj", "unh"
 //		
-//		HistoricalPriceData aaplData = FinancialData.getHistoricalData("aapl");
-//		System.out.println(aaplData);
+		HistoricalPriceData aaplData = FinancialData.getHistoricalData("aapl");
+		System.out.println(aaplData);
 		
 //		GeneticAlgorithm ga = new GeneticAlgorithm(10000, "");
 //		
 //		ga.runAlgorithm();
 		
-//		double[] randomizedArray = MathUtil.randomArray(tickers.length);
-//		double[] normalized = MathUtil.normalize(randomizedArray);
-//		
-//		System.out.println(Arrays.toString(normalized));
+		double[] randomizedArray = MathUtil.randomArray(tickers.length);
+		double[] normalized = MathUtil.normalize(randomizedArray);
 		
-		System.out.println(Arrays.deepToString(FinancialData.getVariousHistoricalReturns(tickers)));
+		System.out.println(Arrays.toString(normalized));
 		
+		double[][] historicalReturns = FinancialData.getVariousHistoricalReturns(tickers);
 		
+		printDeepArray(historicalReturns);
+		
+		double[][] covarience = MathUtil.calculateCovarience(historicalReturns);
+		
+		printDeepArray(covarience);
+	}
+	
+	private static void printDeepArray(double[][] array) {
+		for(double[] i : array) {
+			System.out.println(Arrays.toString(i));
+		}
 	}
 
 }

@@ -17,7 +17,7 @@ public class FinancialData {
 	private final static DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
 	
-	public static HistoricalPriceData getHistoricalData(String ticker) {
+	private static HistoricalPriceData getHistoricalData(String ticker) {
 		HttpRequest request = HttpRequest.newBuilder()
 				.uri(URI.create("https://financialmodelingprep.com/api/v3/historical-price-full/" + ticker + "?apikey=sc4W3hS908VlJfuQ3y5ybtpJDpcugPKz"))
 				.method("GET", HttpRequest.BodyPublishers.noBody())
@@ -53,7 +53,7 @@ public class FinancialData {
 		return historicalPriceData;
 	}
 	
-	public static HistoricalPriceData getHistoricalDataInTimeFrame(HistoricalPriceData priceData, int months) {
+	private static HistoricalPriceData getHistoricalDataInTimeFrame(HistoricalPriceData priceData, int months) {
 		LocalDate endDate = LocalDate.now();
 		LocalDate startDate = endDate.minusMonths(months);
 				
@@ -73,14 +73,14 @@ public class FinancialData {
 		return output;
 	}
 	
-	public static double getHistoricalReturn(HistoricalPriceData priceData) {
+	private static double getHistoricalReturn(HistoricalPriceData priceData) {
 		double end = priceData.getData().getFirst().getPrice();
 		double start = priceData.getData().getLast().getPrice();
 
 		return (end - start) / start;
 	}
 	
-	public static double[][] getVariousHistoricalReturns(String[] tickers) {
+	protected static double[][] getVariousHistoricalReturns(String[] tickers) {
 		double[][] dataframe = new double[tickers.length][TIME_FRAMES.length];
 		
 		for(int i = 0; i < tickers.length; i++) {
@@ -101,4 +101,5 @@ public class FinancialData {
 		
 		return dataframe;
 	}
+	
 }
