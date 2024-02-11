@@ -1,21 +1,22 @@
 package geneticAlgorithm;
 
+import financialData.FinancialDataCalculator;
+
 public class GeneticAlgorithm {
 	private static final double uniformRate = 0.5;
 	private static final double mutationRate = 0.025;
 	private static final int tournamentSize = 1000;
 	private static final int elitismOffset = 1;
 	
-	private double[] solution;
 	private int populationSize;
-	private int maxFitness;
 	private int geneLength;
 	
-	public GeneticAlgorithm(int populationSize, int geneLength) {
+	private FinancialDataCalculator financialData;
+	
+	public GeneticAlgorithm(int populationSize, int geneLength, FinancialDataCalculator financialData) {
 		this.populationSize = populationSize;
 		this.geneLength = geneLength;
-		
-		maxFitness = this.solution.length;
+		this.financialData = financialData;
 	}
 	
 	public void runAlgorithm() {
@@ -95,23 +96,7 @@ public class GeneticAlgorithm {
 		return fittest;
 	}
 	
-	protected int getFitness(Individual individual) {
-		int fitness = 0;
-		
-		for(int i = 0; i < geneLength; i++) {
-			if(individual.getGene(i) == solution[i]) {
-				fitness++;
-			}
-		}
-		
-		return fitness;
+	protected double getFitness(Individual individual) {
+		return financialData.calculateSharpeRatio(individual.getGenes());
 	}
-	
-//	private void setSolution(String solutionString) {
-//		solution = new double[solutionString.length()];
-//		
-//		for(int i = 0; i < solutionString.length(); i++) {
-//			solution[i] = Byte.parseByte(Character.toString(solutionString.charAt(i)));
-//		}
-//	}
 }

@@ -16,10 +16,13 @@ public class Individual {
 		fitness = 0;
 	}
 	
+	protected double[] getGenes() {
+		return genes;
+	}
+	
 	protected double getGene(int index) {
 		return genes[index];
 	}
-	
 	
 	protected void setGene(int index, double gene) {
 		genes[index] = gene;
