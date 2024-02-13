@@ -1,19 +1,18 @@
 package geneticAlgorithm;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Population {
 	private List<Individual> individuals;
-	private int size;
 	
-	public Population(int size, int geneLength, boolean createNew) {
+	public Population(int size, int geneLength, boolean createNew, GeneticAlgorithm algorithm) {
 		individuals = new ArrayList<Individual>();
 		
-		this.size = size;
-		
 		if(createNew) {
-			createNewPopulation(size, geneLength);
+			createNewPopulation(size, geneLength, algorithm);
 		}
 	}
 	
@@ -22,24 +21,36 @@ public class Population {
 	}
 	
 	protected int getSize() {
-		return size;
+		return individuals.size();
 	}
 	
-	protected Individual getFittest(GeneticAlgorithm algorithm) {
-		Individual fittest = individuals.get(0);
+	protected List<Individual> getElitePopulation(GeneticAlgorithm algorithm, double fraction) {
+		sort();
 		
-		for(Individual individual : individuals) {
-			if(fittest.getFitness(algorithm) < individual.getFitness(algorithm)) {
-				fittest = individual;
-			}
+		double eliteNumber = individuals.size() * fraction;
+		
+		List<Individual> elite = new LinkedList<Individual>();
+		
+		for(int i = 0; i < eliteNumber; i++) {
+			elite.add(individuals.get(i));
 		}
 		
-		return fittest;
+		return elite;
 	}
 	
-	private void createNewPopulation(int size, int geneLength) {
+	protected void sort() {
+		Collections.sort(individuals);
+	}
+	
+	protected Individual getFittest() {
+		sort();
+		
+		return individuals.get(0);
+	}
+	
+	private void createNewPopulation(int size, int geneLength, GeneticAlgorithm algorithm) {
 		for(int i = 0; i < size; i++) {
-			individuals.add(new Individual(geneLength));
+			individuals.add(new Individual(geneLength, algorithm));
 		}
 	}
 }

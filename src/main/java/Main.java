@@ -1,41 +1,17 @@
-import java.time.LocalDateTime;
 import java.util.Arrays;
 
-import financialData.FinancialData;
-import financialData.HistoricalPriceData;
-import geneticAlgorithm.GeneticAlgorithm;
-import util.MathUtil;
+import portfolioOptimizer.PortfolioOptimizer;
 
 public class Main {
 
 	public static void main(String[] args) {
-		String[] tickers = {"aapl", "amzn", "googl"}; //  "nvda", "msft", "v", "tsla", "meta", "cost", "jnj", "unh"
-//		
-		HistoricalPriceData aaplData = FinancialData.getHistoricalData("aapl");
-		System.out.println(aaplData);
+		String[] tickers = {"aapl", "amzn", "googl", "nvda", "msft", "v", "tsla", "meta", "cost", "jnj", "unh"};
+
+		PortfolioOptimizer po = new PortfolioOptimizer(tickers);
 		
-//		GeneticAlgorithm ga = new GeneticAlgorithm(10000, "");
-//		
-//		ga.runAlgorithm();
-		
-		double[] randomizedArray = MathUtil.randomArray(tickers.length);
-		double[] normalized = MathUtil.normalize(randomizedArray);
-		
-		System.out.println(Arrays.toString(normalized));
-		
-		double[][] historicalReturns = FinancialData.getVariousHistoricalReturns(tickers);
-		
-		printDeepArray(historicalReturns);
-		
-		double[][] covarience = MathUtil.calculateCovarience(historicalReturns);
-		
-		printDeepArray(covarience);
-	}
-	
-	private static void printDeepArray(double[][] array) {
-		for(double[] i : array) {
-			System.out.println(Arrays.toString(i));
-		}
+		System.out.println(Arrays.toString(po.getOptimizedPortfolio()));
+		System.out.println(po.getExpectedReturns());
+		System.out.println(po.getExpectedRisk());
 	}
 
 }

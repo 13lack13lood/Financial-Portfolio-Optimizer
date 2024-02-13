@@ -83,14 +83,10 @@ public class FinancialData {
 	protected static double[][] getVariousHistoricalReturns(String[] tickers) {
 		double[][] dataframe = new double[tickers.length][TIME_FRAMES.length];
 		
-		for(int i = 0; i < tickers.length; i++) {
-			System.out.println(tickers[i]);
-			
+		for(int i = 0; i < tickers.length; i++) {			
 			HistoricalPriceData priceData = getHistoricalData(tickers[i]);
 			
-			for(int j = 0; j < TIME_FRAMES.length; j++) {
-				System.out.println(TIME_FRAMES[j]);
-				
+			for(int j = 0; j < TIME_FRAMES.length; j++) {				
 				HistoricalPriceData timePriceData = getHistoricalDataInTimeFrame(priceData, TIME_FRAMES[j]);
 				
 				double returns = getHistoricalReturn(timePriceData);

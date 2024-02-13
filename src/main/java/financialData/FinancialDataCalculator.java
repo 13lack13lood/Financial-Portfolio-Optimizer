@@ -4,7 +4,9 @@ import util.MathUtil;
 
 public class FinancialDataCalculator {
 	
-	private static double RISK_FREE_FACTOR = 5.44;
+	private static double RISK_FREE_FACTOR = 0.0544;
+	
+	private int numberOfStocks;
 	
 	private double[][] historicalReturns;
 	private double[][] covarience;
@@ -12,6 +14,8 @@ public class FinancialDataCalculator {
 	private double[] standardDeviation;
 	
 	public FinancialDataCalculator(String[] tickers) {
+		numberOfStocks = tickers.length;
+		
 		historicalReturns = FinancialData.getVariousHistoricalReturns(tickers);
 		
 		covarience = MathUtil.calculateCovarience(historicalReturns);
@@ -20,7 +24,7 @@ public class FinancialDataCalculator {
 	}
 	
 	
-	private double calculateExpectedReturns(double[] portfolio) {
+	public double calculateExpectedReturns(double[] portfolio) {
 		double sum = 0;
 		
 		for(int i = 0; i < portfolio.length; i++) {
@@ -30,7 +34,7 @@ public class FinancialDataCalculator {
 		return sum;
 	}
 	
-	private double calculatePortfolioReturnStandardDevition(double[] portfolio) {
+	public double calculatePortfolioReturnStandardDevition(double[] portfolio) {
 		double output = 0;
 		
 		for(int i = 0; i < portfolio.length; i++) {
@@ -48,5 +52,9 @@ public class FinancialDataCalculator {
 	
 	public double calculateSharpeRatio(double[] portfolio) {
 		return (calculateExpectedReturns(portfolio) - RISK_FREE_FACTOR) / calculatePortfolioReturnStandardDevition(portfolio);
+	}
+	
+	public int getNumberOfStocks() {
+		return numberOfStocks;
 	}
 }

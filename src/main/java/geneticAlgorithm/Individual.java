@@ -4,16 +4,16 @@ import java.util.Arrays;
 
 import util.MathUtil;
 
-public class Individual {
+public class Individual implements Comparable<Individual> {
 	
 	private double[] genes;
-	private int fitness;
+	private double fitness;
 	
-	public Individual(int geneLength) {
+	public Individual(int geneLength, GeneticAlgorithm algorithm) {
 		double[] randomArray = MathUtil.randomArray(geneLength);
 		genes = MathUtil.normalize(randomArray);
 		
-		fitness = 0;
+		fitness = algorithm.getFitness(this);
 	}
 	
 	protected double[] getGenes() {
@@ -28,11 +28,7 @@ public class Individual {
 		genes[index] = gene;
 	}
 	
-	protected int getFitness(GeneticAlgorithm algorithm) {
-		if(fitness == 0) {
-			fitness = algorithm.getFitness(this);
-		}
-		
+	protected double getFitness() {
 		return fitness;
 	}
 	
@@ -40,4 +36,10 @@ public class Individual {
 	public String toString() {
 		return Arrays.toString(genes);
 	}
+
+	public int compareTo(Individual o) {
+		return Double.compare(o.getFitness(), fitness);
+	}
+	
+
 }
