@@ -1,4 +1,4 @@
-package financialData;
+package com.financialData;
 
 public class HistoricalPriceDataPoint {
 	private double price;

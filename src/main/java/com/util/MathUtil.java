@@ -1,4 +1,4 @@
-package util;
+package com.util;
 
 public class MathUtil {
 	public static double[] normalize(double[] array) {

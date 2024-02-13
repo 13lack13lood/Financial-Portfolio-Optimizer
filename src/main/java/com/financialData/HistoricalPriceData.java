@@ -1,4 +1,4 @@
-package financialData;
+package com.financialData;
 import java.util.LinkedList;
 
 public class HistoricalPriceData {

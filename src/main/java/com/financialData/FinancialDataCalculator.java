@@ -1,6 +1,6 @@
-package financialData;
+package com.financialData;
 
-import util.MathUtil;
+import com.util.MathUtil;
 
 public class FinancialDataCalculator {
 	

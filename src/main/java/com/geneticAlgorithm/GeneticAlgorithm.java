@@ -1,8 +1,8 @@
-package geneticAlgorithm;
+package com.geneticAlgorithm;
 
 import java.util.List;
 
-import financialData.FinancialDataCalculator;
+import com.financialData.FinancialDataCalculator;
 
 public class GeneticAlgorithm {
 	private static final double regularMutationRate = 0.4;

@@ -1,8 +1,8 @@
-package geneticAlgorithm;
+package com.geneticAlgorithm;
 
 import java.util.Arrays;
 
-import util.MathUtil;
+import com.util.MathUtil;
 
 public class Individual implements Comparable<Individual> {
 	
