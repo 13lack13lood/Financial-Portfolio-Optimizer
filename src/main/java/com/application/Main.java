@@ -15,6 +15,6 @@ public class Main {
 
 	@GetMapping
 	public String hello() {
-		return "asdf";
+		return "Hello";
 	}
 }

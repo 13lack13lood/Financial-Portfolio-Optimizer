@@ -1,20 +1,22 @@
 package com.application.portfolioOptimizer;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin
 @RequestMapping(path = "portfolio")
 public class PortfolioOptimizerController {
 
-	@GetMapping()
-	public PortfolioOptimizer getOptimizedPortfolio() {
-		String[] tickers = { "aapl", "amzn", "googl", "nvda", "msft", "v", "tsla", "meta", "cost", "jnj", "unh" };
-
+	@PostMapping(consumes = "application/json", produces = "application/json")
+	public PortfolioOptimizer getOptimizedPortfolio(@RequestBody String[] tickers) throws Exception{
 		PortfolioOptimizer po = new PortfolioOptimizer(tickers);
 
 		return po;
+
 	}
 
 }
