@@ -9,7 +9,7 @@ The link to the website demonstrating the portfolio optimizer is listed above.
 ### Technologies Used
 - Spring Boot
 - Docker
-- AWS
+- AWS (EC2  instance)
 - Maven
 - NextJS
 - React
