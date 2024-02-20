@@ -4,10 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>HarryZhu</groupId>
 	<artifactId>PortfolioOptimizer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>FinancialPortfolioOptimizer</name>
 	<properties>
 		<java.version>17</java.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -26,6 +28,19 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>3.2.2</version>
+				<configuration>
+					<mainClass>com.application.Main</mainClass>
+					<layout>JAR</layout>
+				</configuration>
+
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
